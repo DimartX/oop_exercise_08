@@ -1,0 +1,67 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}memory\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}vector\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}thread\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}processor.hpp\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}subscriber.hpp\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}figure.hpp\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}triangle.hpp\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}square.hpp\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}rectangle.hpp\PYGZdq{}}
+
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{Figure}\PYG{o}{\PYGZgt{}} \PYG{n}{getFigure}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{istream}\PYG{o}{\PYGZam{}} \PYG{n}{is}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{Figure}\PYG{o}{*} \PYG{n}{fig}\PYG{p}{;}
+    \PYG{n}{is} \PYG{o}{\PYGZgt{}\PYGZgt{}} \PYG{n}{fig}\PYG{p}{;}
+    \PYG{k}{return} \PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{Figure}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{fig}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{int} \PYG{n}{main}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{argc}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{argv}\PYG{p}{[])} \PYG{p}{\PYGZob{}}
+    \PYG{k}{if} \PYG{p}{(}\PYG{n}{argc} \PYG{o}{!=} \PYG{l+m+mi}{2}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Usage: \PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{argv}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{} \PYGZlt{}buffer size\PYGZgt{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{;}
+        \PYG{k}{return} \PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{buf\PYGZus{}size} \PYG{o}{=} \PYG{n}{std}\PYG{o}{::}\PYG{n}{stoi}\PYG{p}{(}\PYG{n}{argv}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]);}
+
+    \PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{Figure}\PYG{o}{\PYGZgt{}\PYGZgt{}\PYGZgt{}} \PYG{n}{buffer} \PYG{o}{=}
+        \PYG{n}{std}\PYG{o}{::}\PYG{n}{make\PYGZus{}shared}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{Figure}\PYG{o}{\PYGZgt{}\PYGZgt{}\PYGZgt{}}\PYG{p}{();}
+    \PYG{n}{buffer}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{reserve}\PYG{p}{(}\PYG{n}{buf\PYGZus{}size}\PYG{p}{);}
+
+    \PYG{n}{subscriber} \PYG{n}{sub}\PYG{p}{;}
+    \PYG{n}{sub}\PYG{p}{.}\PYG{n}{processors}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{make\PYGZus{}shared}\PYG{o}{\PYGZlt{}}\PYG{n}{stream\PYGZus{}processor}\PYG{o}{\PYGZgt{}}\PYG{p}{());}
+    \PYG{n}{sub}\PYG{p}{.}\PYG{n}{processors}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{make\PYGZus{}shared}\PYG{o}{\PYGZlt{}}\PYG{n}{file\PYGZus{}processor}\PYG{o}{\PYGZgt{}}\PYG{p}{());}
+    \PYG{n}{std}\PYG{o}{::}\PYG{k+kr}{thread} \PYG{n}{sub\PYGZus{}thread}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{ref}\PYG{p}{(}\PYG{n}{sub}\PYG{p}{));}
+    
+    \PYG{k}{while}\PYG{p}{(}\PYG{n+nb}{true}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{std}\PYG{o}{::}\PYG{n}{unique\PYGZus{}lock}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{mutex}\PYG{o}{\PYGZgt{}} \PYG{n}{guard}\PYG{p}{(}\PYG{n}{sub}\PYG{p}{.}\PYG{n}{mtx}\PYG{p}{);}
+        \PYG{n}{std}\PYG{o}{::}\PYG{n}{string} \PYG{n}{cmd}\PYG{p}{;}
+        \PYG{n}{std}\PYG{o}{::}\PYG{n}{cin} \PYG{o}{\PYGZgt{}\PYGZgt{}} \PYG{n}{cmd}\PYG{p}{;}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{cmd} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}add\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{k}{try} \PYG{p}{\PYGZob{}}
+                \PYG{n}{buffer}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{getFigure}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{cin}\PYG{p}{));}
+            \PYG{p}{\PYGZcb{}}
+            \PYG{k}{catch} \PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{logic\PYGZus{}error}\PYG{o}{\PYGZam{}} \PYG{n}{e}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+                \PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{e}\PYG{p}{.}\PYG{n}{what}\PYG{p}{()} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{;}
+                \PYG{k}{continue}\PYG{p}{;}
+            \PYG{p}{\PYGZcb{}}
+            \PYG{k}{if} \PYG{p}{(}\PYG{n}{buffer}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{size}\PYG{p}{()} \PYG{o}{==} \PYG{n}{buf\PYGZus{}size}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+                \PYG{n}{sub}\PYG{p}{.}\PYG{n}{buffer} \PYG{o}{=} \PYG{n}{buffer}\PYG{p}{;}
+                \PYG{n}{sub}\PYG{p}{.}\PYG{n}{cv}\PYG{p}{.}\PYG{n}{notify\PYGZus{}all}\PYG{p}{();}
+                \PYG{n}{sub}\PYG{p}{.}\PYG{n}{cv}\PYG{p}{.}\PYG{n}{wait}\PYG{p}{(}\PYG{n}{guard}\PYG{p}{,} \PYG{p}{[}\PYG{o}{\PYGZam{}}\PYG{p}{]()} \PYG{p}{\PYGZob{}} \PYG{k}{return} \PYG{n}{sub}\PYG{p}{.}\PYG{n}{buffer} \PYG{o}{==} \PYG{k}{nullptr}\PYG{p}{;} \PYG{p}{\PYGZcb{});}
+                \PYG{n}{buffer}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{clear}\PYG{p}{();}
+            \PYG{p}{\PYGZcb{}}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{k}{else} \PYG{k}{if} \PYG{p}{(}\PYG{n}{cmd} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}exit\PYGZdq{}}\PYG{p}{)\PYGZob{}}
+            \PYG{k}{break}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{k}{else} \PYG{p}{\PYGZob{}}
+            \PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Wrong command!}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{sub}\PYG{p}{.}\PYG{n}{end} \PYG{o}{=} \PYG{n+nb}{true}\PYG{p}{;}
+    \PYG{n}{sub}\PYG{p}{.}\PYG{n}{cv}\PYG{p}{.}\PYG{n}{notify\PYGZus{}all}\PYG{p}{();}
+    \PYG{n}{sub\PYGZus{}thread}\PYG{p}{.}\PYG{n}{join}\PYG{p}{();}
+    
+    \PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

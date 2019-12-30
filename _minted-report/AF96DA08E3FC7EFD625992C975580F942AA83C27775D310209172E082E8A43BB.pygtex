@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}pragma once}
+
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}vector\PYGZgt{}}
+
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}figure.hpp\PYGZgt{}}
+
+\PYG{k}{class} \PYG{n+nc}{Triangle} \PYG{o}{:} \PYG{k}{public} \PYG{n}{Figure}\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+    \PYG{n}{Triangle}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{Point}\PYG{o}{\PYGZgt{}} \PYG{k}{const}\PYG{o}{\PYGZam{}} \PYG{p}{);}
+
+    \PYG{n}{Point} \PYG{n+nf}{figureCenter}\PYG{p}{()} \PYG{k}{const} \PYG{k}{override}\PYG{p}{;}
+    \PYG{k+kt}{double} \PYG{n+nf}{figureArea}\PYG{p}{()} \PYG{k}{const} \PYG{k}{override}\PYG{p}{;}
+    \PYG{k+kt}{void} \PYG{n+nf}{printPoints}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{ostream}\PYG{o}{\PYGZam{}} \PYG{p}{)} \PYG{k}{const} \PYG{k}{override}\PYG{p}{;}
+    
+    \PYG{o}{\PYGZti{}}\PYG{n}{Triangle}\PYG{p}{()} \PYG{o}{=} \PYG{k}{default}\PYG{p}{;}
+\PYG{k}{protected}\PYG{o}{:}
+    \PYG{k}{static} \PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{NUM} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{p}{;}
+    \PYG{n}{Point} \PYG{n}{pts}\PYG{p}{[}\PYG{n}{NUM}\PYG{p}{];}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

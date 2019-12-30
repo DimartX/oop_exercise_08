@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}pragma once}
+
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}point.hpp\PYGZgt{}}
+
+\PYG{k}{struct} \PYG{n}{Figure} \PYG{p}{\PYGZob{}}
+    \PYG{k}{virtual} \PYG{n}{Point} \PYG{n}{figureCenter}\PYG{p}{()} \PYG{k}{const} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{virtual} \PYG{k+kt}{double} \PYG{n+nf}{figureArea}\PYG{p}{()} \PYG{k}{const} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{virtual} \PYG{k+kt}{void} \PYG{n+nf}{printPoints}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{ostream}\PYG{o}{\PYGZam{}} \PYG{p}{)} \PYG{k}{const} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+    \PYG{k}{virtual} \PYG{o}{\PYGZti{}}\PYG{n}{Figure}\PYG{p}{()} \PYG{o}{=} \PYG{k}{default}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{ostream}\PYG{o}{\PYGZam{}} \PYG{k}{operator}\PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{ostream}\PYG{o}{\PYGZam{}} \PYG{n}{out}\PYG{p}{,} \PYG{n}{Figure} \PYG{k}{const}\PYG{o}{\PYGZam{}} \PYG{n}{fig}\PYG{p}{);}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{istream}\PYG{o}{\PYGZam{}} \PYG{k}{operator}\PYG{o}{\PYGZgt{}\PYGZgt{}} \PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{istream}\PYG{o}{\PYGZam{}} \PYG{n}{in}\PYG{p}{,} \PYG{n}{Figure}\PYG{o}{*\PYGZam{}} \PYG{n}{fig}\PYG{p}{);}
+
+    
+\end{Verbatim}
